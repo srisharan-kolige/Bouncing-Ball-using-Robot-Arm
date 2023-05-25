@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pan">
+  <xacro:macro name="pan" params="connected_to:='' ns:='' rpy:='0 0 0' xyz:='0 0 0' ">
+    <xacro:unless value="${connected_to == ''}">
+      <joint name="${ns}_hand_joint" type="fixed">
+        <parent link="${connected_to}"/>
+        <child link="${ns}_pan"/>
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+      </joint>
+    </xacro:unless>
+
+  <!-- Frying pan model, Copyright (c) 2016 Oleg Klimov -->
+  <!-- LICENSE: CC-SA -->
+
+  <link name="${ns}_pan">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="pan_tefal.obj"/>
+      </geometry>
+    </visual>
+
+    <visual name="handle">
+      <geometry>
+        <cylinder radius="0.011" length="0.185"/>
+      </geometry>
+      <origin rpy="0 1.4 0" xyz="0.22 0 0.07"/>
+      <material name="stainless">
+        <color rgba="0.3 0.3 .3 1"/>
+      </material>
+    </visual>
+
+    <collision name="handle">
+      <geometry>
+        <cylinder radius="0.011" length="0.185"/>
+      </geometry>
+      <origin rpy="0 1.4 0" xyz="0.22 0 0.07"/>
+    </collision>
+
+    <collision name="bottom">
+      <geometry>
+        <cylinder radius="0.12" length="0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.005"/>
+    </collision>
+
+    <collision name="collision01">
+      <geometry>
+        <mesh filename="pan_tefal-collision01.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <collision name="collision02">
+      <geometry>
+        <mesh filename="pan_tefal-collision02.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <collision name="collision03">
+      <geometry>
+        <mesh filename="pan_tefal-collision03.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <collision name="collision04">
+      <geometry>
+        <mesh filename="pan_tefal-collision04.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <collision name="collision05">
+      <geometry>
+        <mesh filename="pan_tefal-collision05.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <collision name="collision06">
+      <geometry>
+        <mesh filename="pan_tefal-collision06.obj"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <inertial>
+      <mass value="2."/> <!-- mr^2 = 0.5*0.12^2 = 0.0072 for Z axis, lighter along other axis -->
+      <inertia ixx="0.005" iyy="0.005" izz="0.0072"/>
+    </inertial>
+  </link>
+  </xacro:macro>
+</robot>
